@@ -1,3 +1,7 @@
+## Usage of our custom data source
+
+<img src="s1.png" alt="image" width="100%" height="100%">
+
 # Grafana data source plugin template
 
 This template is a starting point for building a Data Source Plugin for Grafana.
