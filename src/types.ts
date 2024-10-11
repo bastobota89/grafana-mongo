@@ -2,33 +2,40 @@ import { DataSourceJsonData } from '@grafana/data';
 import { DataQuery } from '@grafana/schema';
 
 export interface MyQuery extends DataQuery {
-  queryText?: string;
-  constant: number;
+    owner: string;
 }
 
 export const DEFAULT_QUERY: Partial<MyQuery> = {
-  constant: 6.5,
+    owner: 'grafana', // default owner
 };
 
-export interface DataPoint {
-  Time: number;
-  Value: number;
-}
+// export interface DataPoint {
+//     Time: number;
+//     Value: number;
+// }
 
 export interface DataSourceResponse {
-  datapoints: DataPoint[];
+    target: string;
+    datapoints: RepoStats;
 }
 
 /**
  * These are options configured for each DataSource instance
  */
 export interface MyDataSourceOptions extends DataSourceJsonData {
-  path?: string;
+    apiToken: string;
 }
 
 /**
  * Value that is used in the backend, but never sent over HTTP to the frontend
  */
 export interface MySecureJsonData {
-  apiKey?: string;
+    apiToken: string;
+}
+
+export interface RepoStats {
+    name: string;
+    stargazers_count: number;
+    forks_count: number;
+    open_issues_count: number;
 }

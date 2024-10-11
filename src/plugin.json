@@ -3,13 +3,29 @@
   "type": "datasource",
   "name": "RepoMonitor",
   "id": "rumi-repomonitor-datasource",
+  "jsonData": {
+    "apiToken": ""
+  },
+  "secureJsonData": {
+    "apiToken": ""
+  },
+  "settings": {
+    "apiToken": {
+      "type": "string",
+      "label": "GitHub API Token",
+      "description": "Enter your GitHub API token here.",
+      "secure": true
+    }
+  },
   "metrics": true,
   "info": {
     "description": "",
     "author": {
       "name": "Rumi"
     },
-    "keywords": ["datasource"],
+    "keywords": [
+      "datasource"
+    ],
     "logos": {
       "small": "img/logo.svg",
       "large": "img/logo.svg"
