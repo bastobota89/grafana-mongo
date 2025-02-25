@@ -34,6 +34,11 @@ export interface MySecureJsonData {
 }
 
 export interface RepoStats {
+    lat: number;
+    lng: number;
+    identifier: string;
+    title: string;
+    timeline: Date;
     name: string;
     stargazers_count: number;
     forks_count: number;

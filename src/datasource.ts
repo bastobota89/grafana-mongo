@@ -17,12 +17,12 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     constructor(instanceSettings: DataSourceInstanceSettings<MyDataSourceOptions>) {
         super(instanceSettings);
         // this.url = instanceSettings.url || 'https://api.github.com';
-        this.url = 'https://api.github.com';
+        this.url = 'http://194.233.88.16:4000';
         this.apiToken = instanceSettings.jsonData.apiToken;
     }
 
     async fetchPublicRepos(username: string) {
-        const response = await axios.get(`${this.url}/users/${username}/repos?per_page=10&sort=updated&direction=desc`);
+        const response = await axios.get(`${this.url}/api/data/?limit=20`);
         return response.data; // This will be an array of repositories
     }
 
@@ -58,7 +58,8 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
             const repos = await this.fetchPublicRepos(target.owner);
             console.log(repos);
 
-            repos.forEach((repo: RepoStats) => {
+            repos.data.forEach((repo: RepoStats) => {
+                let timeline = new Date(repo.timeline).getTime();
                 results.push({
                     // refId: target.refId,
                     // fields: [
@@ -68,9 +69,10 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
                     //     { name: 'Open Issues', values: [repo.open_issues_count], type: FieldType.number },
                     // ],
 
-                    target: repo.name,
+                    target: repo.identifier,
                     datapoints: [
-                        [repo.stargazers_count, Date.now()],
+                        [repo.lat, timeline],
+                        [repo.lng, timeline],
                         // [repo.forks_count, Date.now()],
                         // [repo.open_issues_count, Date.now()],
                     ],
